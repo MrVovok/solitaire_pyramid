@@ -1,0 +1,368 @@
+import random
+from tkinter import *
+import pygame
+import tkinter as tk
+
+root = Tk()
+root.title("solitaire_pyramid")
+root.geometry("700x600")
+root.resizable(False, False)
+icon = PhotoImage(file="free-icon-pyramid-5088251.png")
+root.iconphoto(False, icon)
+
+#******************************************************************************************************CANVAS\ПЕРЕМЕННЫЕ
+
+
+color = "green"
+
+canvas = Canvas(bg=color, width=800, height=800)
+canvas.pack(anchor=CENTER, expand=1)
+
+_color_ = "green"
+
+del_but = 6
+
+
+counter_of_words_of_cards = ""
+counter_of_cards = 0
+
+counter_of_taps = ""
+
+counter_of_delited_buttons = 0
+
+score = 0
+
+random_digits_for_card_1 = random.randint(4, 9)
+random_digits_for_card_2 = random.randint(4, 9)
+random_digits_for_card_3 = random.randint(4, 9)
+random_digits_for_card_4 = random.randint(4, 9)
+random_digits_for_card_5 = random.randint(4, 9)
+random_digits_for_card_6 = random.randint(4, 9)
+
+# Label(text="good", font="Arial 20 normal roman", bg="blue").pack()
+
+
+def out_green(text):
+    print("\033[32m {}" .format(text))
+def out_red(text):
+    print("\033[31m {}" .format(text))
+
+out_green(">start<")
+
+#*******************************************************************************************************************СЧЕТ
+
+score = str(score)
+schet = "СЧЕТ: "
+Label(text=" " * 100, font="Arial 30 normal roman", bg="green").place(x=0, y=550)
+Label(text=schet + score, font="Arial 30 normal roman").place(x=0, y=550)
+score = int(score)
+
+#***********************************************************************************************************ЗВУКИ\МУЗЫКА
+
+pygame.mixer.init()
+
+
+pygame.mixer.music.load("81cebf7e45fdef7 (1).mp3")
+pygame.mixer.music.play(loops=1000)
+
+def stop_mus():
+    pygame.mixer.music.stop()
+
+    def start_mus():
+        pygame.mixer.music.load("81cebf7e45fdef7 (1).mp3")
+        pygame.mixer.music.play(loops=1000)
+
+    Button(text="МУЗЫКА: ВКЛ", command=start_mus, bg='light gray', cursor="hand2", font="Arial 13 normal roman") \
+        .place(height=50, width=150, x=500, y=50)
+
+Button(text="МУЗЫКА: ВЫКЛ", command=stop_mus, bg='light gray', cursor="hand2", font="Arial 13 normal roman")\
+    .place(height=50, width=150, x=500, y=0)
+
+
+
+#***********************************************************************************************************ФУНКЦИИ_КАРТ
+
+def but_1():
+    global counter_of_cards
+    global counter_of_words_of_cards
+    global random_digits_for_card_1
+    global counter_of_taps
+    counter_of_cards += random_digits_for_card_1
+    random_digits_for_card_1 = str(random_digits_for_card_1)
+    counter_of_words_of_cards += random_digits_for_card_1
+    random_digits_for_card_1 = int(random_digits_for_card_1)
+    counter_of_taps += "1"
+    print("but_1 --> good")
+def but_2():
+    global counter_of_cards
+    global counter_of_words_of_cards
+    global random_digits_for_card_2
+    global counter_of_taps
+    counter_of_cards += random_digits_for_card_2
+    random_digits_for_card_2 = str(random_digits_for_card_2)
+    counter_of_words_of_cards += random_digits_for_card_2
+    random_digits_for_card_2 = int(random_digits_for_card_2)
+    counter_of_taps += "2"
+    print("but_2 --> good")
+def but_3():
+    global counter_of_cards
+    global counter_of_words_of_cards
+    global random_digits_for_card_3
+    global counter_of_taps
+    counter_of_cards += random_digits_for_card_3
+    random_digits_for_card_3 = str(random_digits_for_card_3)
+    counter_of_words_of_cards += random_digits_for_card_3
+    random_digits_for_card_3 = int(random_digits_for_card_3)
+    counter_of_taps += "3"
+    print("but_3 --> good")
+def but_4():
+    global counter_of_cards
+    global counter_of_words_of_cards
+    global random_digits_for_card_4
+    global counter_of_taps
+    counter_of_cards += random_digits_for_card_4
+    random_digits_for_card_4 = str(random_digits_for_card_4)
+    counter_of_words_of_cards += random_digits_for_card_4
+    random_digits_for_card_4 = int(random_digits_for_card_4)
+    counter_of_taps += "4"
+    print("but_4 --> good")
+def but_5():
+    global counter_of_cards
+    global counter_of_words_of_cards
+    global random_digits_for_card_5
+    global counter_of_taps
+    counter_of_cards += random_digits_for_card_5
+    random_digits_for_card_5 = str(random_digits_for_card_5)
+    counter_of_words_of_cards += random_digits_for_card_5
+    random_digits_for_card_5 = int(random_digits_for_card_5)
+    counter_of_taps += "5"
+    print("but_5 --> good")
+def but_6():
+    global counter_of_cards
+    global counter_of_words_of_cards
+    global random_digits_for_card_6
+    global counter_of_taps
+    counter_of_cards += random_digits_for_card_6
+    random_digits_for_card_6 = str(random_digits_for_card_6)
+    counter_of_words_of_cards += random_digits_for_card_6
+    random_digits_for_card_6 = int(random_digits_for_card_6)
+    counter_of_taps += "6"
+    print("but_6 --> good")
+
+#**********************************************************************************************************ПОДТВЕРЖДЕНИЕ
+
+def apply():
+    global score
+    global counter_of_cards
+    global counter_of_words_of_cards
+    global counter_of_taps
+    global counter_of_delited_buttons
+    print("apply --> good")
+    print(counter_of_cards, "<>", counter_of_taps)
+    if counter_of_cards == 13:
+        print("if --> good")
+        def ggg():
+            global score
+            global counter_of_delited_buttons
+            global del_but
+            print("ggg --> good")
+            if counter_of_taps == "45" or counter_of_taps == "54":
+                del_but -= 2
+                canvas.delete(btnId_4)
+                canvas.delete(btnId_5)
+            elif counter_of_taps == "46" or counter_of_taps == "64":
+                del_but -= 2
+                canvas.delete(btnId_4)
+                canvas.delete(btnId_6)
+            elif counter_of_taps == "47" or counter_of_taps == "74":
+                del_but -= 1
+                canvas.delete(btnId_4)
+            elif counter_of_taps == "56" or counter_of_taps == "65":
+                del_but -= 2
+                canvas.delete(btnId_5)
+                canvas.delete(btnId_6)
+            elif counter_of_taps == "57" or counter_of_taps == "75":
+                del_but -= 1
+                canvas.delete(btnId_5)
+            elif counter_of_taps == "67" or counter_of_taps == "76":
+                del_but -= 1
+                canvas.delete(btnId_6)
+            elif counter_of_taps == "23" or counter_of_taps == "32":
+                del_but -= 2
+                canvas.delete(btnId_2)
+                canvas.delete(btnId_3)
+            elif counter_of_taps == "27" or counter_of_taps == "72":
+                del_but -= 1
+                canvas.delete(btnId_2)
+            elif counter_of_taps == "37" or counter_of_taps == "73":
+                del_but -= 1
+                canvas.delete(btnId_3)
+            elif counter_of_taps == "17" or counter_of_taps == "71":
+                del_but -= 1
+                canvas.delete(btnId_1)
+            elif counter_of_taps == "62" or counter_of_taps == "26":
+                del_but -= 2
+                canvas.delete(btnId_2)
+                canvas.delete(btnId_6)
+            elif counter_of_taps == "43" or counter_of_taps == "34":
+                del_but -= 2
+                canvas.delete(btnId_3)
+                canvas.delete(btnId_4)
+            else:
+                out_red("-->err<--")
+            counter_of_delited_buttons += 1
+            score += 300
+
+        ggg()
+
+        score = str(score)
+        schet = "СЧЕТ: "
+        Label(text=" " * 100, font="Arial 30 normal roman", bg="green").place(x=0, y=550)
+        Label(text=schet + score, font="Arial 30 normal roman").place(x=0, y=550)
+        score = int(score)
+
+
+        counter_of_cards = 0
+        counter_of_words_of_cards = ""
+        counter_of_taps = ""
+        print("CODB -->", counter_of_delited_buttons)
+        print("del_but -->", del_but)
+    counter_of_cards = 0
+    counter_of_words_of_cards = ""
+    counter_of_taps = ""
+
+    def excc():
+        global mus
+        pygame.mixer.music.load("zvuk-pobedyi-v-igrovom-urovne-30120.mp3")
+        pygame.mixer.music.play(loops=0)
+        canvas.create_text(350, 200, text="победа!", font="Arial 100 normal roman", fill="white")
+    if del_but == 0:
+        print("if (exc) --> good")
+        excc()
+    print("-" * 30)
+Button(text="принять", command=apply, bg='light gray', cursor="hand2", font="Arial 15 normal roman")\
+    .place(height=50, width=100, x=500, y=400)
+
+#*****************************************************************************************************************КОЛОДА
+
+def deck():
+    global score
+    global random_digits_for_deck
+    random_digits_for_deck = random.randint(4, 9)
+    score -= 100
+
+    score = str(score)
+    schet = "СЧЕТ: "
+    Label(text=" " * 100, font="Arial 30 normal roman", bg="green").place(x=0, y=550)
+    Label(text=schet + score, font="Arial 30 normal roman").place(x=0, y=550)
+    score = int(score)
+
+    def deck_card():
+        global counter_of_cards
+        global counter_of_words_of_cards
+        global random_digits_for_deck
+        global counter_of_taps
+        counter_of_cards += random_digits_for_deck
+        random_digits_for_deck = str(random_digits_for_deck)
+        counter_of_words_of_cards += random_digits_for_deck
+        random_digits_for_deck = int(random_digits_for_deck)
+        counter_of_taps += "7"
+        print("deck_card --> good")
+
+    btnId_7 = Button(text=random_digits_for_deck, command=deck_card, bg='white', cursor="hand2", font="Arial 20 normal roman")\
+        .place(height=150, width=100, x=260, y=350)
+
+Button(text="карта из колоды \n-->", command=deck, bg='light blue', cursor="hand2")\
+    .place(height=150, width=100, x=150, y=350)
+
+
+
+
+#******************************************************************************************************************КАРТЫ
+
+btn_1 = Button(text=random_digits_for_card_1, command=but_1, bg='white', cursor="hand2", font="Arial 20 normal roman")
+btnId_1 = canvas.create_window(275, 50, anchor=NW, window=btn_1, height=150, width=100)
+btn_2 = Button(text=random_digits_for_card_2, command=but_2, bg='white', cursor="hand2", font="Arial 20 normal roman")
+btnId_2 = canvas.create_window(225, 100, anchor=NW, window=btn_2, height=150, width=100)
+btn_3 = Button(text=random_digits_for_card_3, command=but_3, bg='white', cursor="hand2", font="Arial 20 normal roman")
+btnId_3 = canvas.create_window(325, 100, anchor=NW, window=btn_3, height=150, width=100)
+btn_4 = Button(text=random_digits_for_card_4, command=but_4, bg='white', cursor="hand2", font="Arial 20 normal roman")
+btnId_4 = canvas.create_window(175, 150, anchor=NW, window=btn_4, height=150, width=100)
+btn_5 = Button(text=random_digits_for_card_5, command=but_5, bg='white', cursor="hand2", font="Arial 20 normal roman")
+btnId_5 = canvas.create_window(275, 150, anchor=NW, window=btn_5, height=150, width=100)
+btn_6 = Button(text=random_digits_for_card_6, command=but_6, bg='white', cursor="hand2", font="Arial 20 normal roman")
+btnId_6 = canvas.create_window(375, 150, anchor=NW, window=btn_6, height=150, width=100)
+
+#**************************************************************************************************************ПОДСКАЗКА
+
+def tip():
+    root_tip = Tk()
+    root_tip.title("pyramid: tip")
+    root_tip.geometry("630x400")
+    root_tip.resizable(False, False)
+    # icon_2 = PhotoImage(file="free-icon-pyramid-5088251.png")
+    # root_tip.iconphoto(True, icon_2)
+
+    text = "<ПРАВИЛА>\nЭто игра в пасьянс 'пирамида'. Главная задача игрока: \n разобрать пирамиду за максимальное кол-во очков" \
+           ".  \n Чтобы это сделать игроку нужно создать пару \n из двух карт, у которых цифры в сумме дают число 13. \n " \
+           "За это ему дают 300 очков, но при каждом нажатии на \n " \
+           "колоду отнимается 100 очков. Но при этом карта из колоды \n может взаимодействовать со всеми " \
+           "картами из пирамиды.\n" \
+           "<УПРАВЛЕНИЕ>\n Чтобы сложить две карты нужно на них нажать по очереди \n и следом нажать на кнопку 'принять'. \n" \
+           "Если карты в сумме дают 13, то они пропадают иначе - нет. \n Если в пирамиде не оказалось нужных карт, то " \
+           "нужно нажать на \n колоду с картами и выпадет одна карта, \n эта карта может оказаться нужной. \n" \
+           "Музыку тоже можно выключить, нажав на кнопку 'МУЗЫКА:ВЫКЛ'. \nТак же и включить обратно, только нажав на " \
+           "'МУЗЫКА:ВКЛ'"
+
+    Label(root_tip, text=text, font="Arial 15 normal roman").pack()
+
+
+    root_tip.mainloop()
+
+Button(text="?", command=tip, bg='light gray', cursor="hand2", font="Arial 20 normal roman")\
+    .place(height=50, width=50, x=650, y=0)
+
+#**************************************************************************************************************НАСТРОЙКИ
+
+def settings():
+    root_settings = Tk()
+    root_settings.title("pyramid: settings")
+    root_settings.geometry("300x300")
+    root_settings.resizable(False, False)
+
+    Label(root_settings, text="<ЦВЕТ СТОЛА>", font="Arial 15 normal roman").pack()
+
+    def green():
+        global color
+        _color_ = "green"
+    def red():
+        global color
+        _color_ = "red"
+
+    Button(root_settings, command=green, bg='green', cursor="hand2") \
+        .place(height=50, width=50, x=0, y=50)
+    Button(root_settings, command=red, bg='red', cursor="hand2") \
+        .place(height=50, width=50, x=55, y=50)
+    Button(root_settings, command=tip, bg='blue', cursor="hand2") \
+        .place(height=50, width=50, x=110, y=50)
+    Button(root_settings, command=tip, bg='yellow', cursor="hand2") \
+        .place(height=50, width=50, x=165, y=50)
+
+    root_settings.mainloop()
+
+# Button(text="НАСТРОЙКИ", command=settings, bg='light gray', cursor="hand2", font="Arial 13 normal roman")\
+#     .place(height=50, width=110, x=540, y=0)
+
+#******************************************************************************************************************ВЫХОД
+
+def exit():
+    quit()
+
+Button(text="<--ВЫХОД", command=exit, bg='light gray', cursor="hand2", font="Arial 13 normal roman")\
+    .place(height=50, width=100, x=0, y=0)
+
+#****************************************************************************************************************МАИНЛУП
+
+
+
+root.mainloop()
